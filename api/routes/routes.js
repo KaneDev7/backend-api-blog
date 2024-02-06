@@ -10,11 +10,11 @@ const app = express()
 
 
 // artciles routes
-route.get('/articles', authVerification, getArticles)
+route.get('/articles', getArticles)
 route.get('/article/:id',getArticle)
-route.post('/article',postArticle)
-route.delete('/article/:id',deleteArticle)
-route.put('/article/:id',editArticle)
+route.post('/article',authVerification, postArticle)
+route.delete('/article/:id',authVerification,deleteArticle)
+route.put('/article/:id',authVerification, editArticle)
 
 // users routes
 route.post('/auth/register', register)

@@ -5,7 +5,7 @@ const bcrypt = require('bcrypt')
 
 const register = async (req, res) => {
     console.log('body', req.body)
-    const { username, password } = req.body
+    const {username, password } = req.body
     if (!username || !password) {
        return res.status(400).json({ message: 'incorrecte username or password' })
     }
@@ -13,7 +13,7 @@ const register = async (req, res) => {
     try {
         const user = await UsersModel.findOne({ where: { username } });
         console.log('user',user)
-        if (user || user?.username === username) {
+        if (user || user?.username.toLowerCase() === username.toLowerCase()) {
             return res.status(409).json({ message: 'username already existe' })
         }
         const passwordHash = await bcrypt.hash(password, 10)
@@ -49,7 +49,7 @@ const login = async (req, res) => {
         )
         await UsersModel.update({ jwt: token }, { where: { username } })
         res.cookie('token', refreshToken, { maxAge: 60000, httpOnly: true });
-        res.status(200).json({username : user.username })
+        res.status(200).json({username : user.username, token })
     
     } catch (error) {
         console.log(error)

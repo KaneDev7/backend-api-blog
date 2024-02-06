@@ -11,7 +11,7 @@
 @media screen and (max-width: 1050px)  {
   .globalWidth{
     width: 100%;
-    padding: 10px;
+    padding: 10px 30px;
   }
 }
 /* :root {

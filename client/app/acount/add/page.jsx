@@ -4,7 +4,7 @@ import { upload } from '../../../lib/articles'
 import Image from 'next/image'
 import React, { useState, useEffect } from 'react'
 import TextEditor from '../../lexical-textEditor/textEditor'
-import {categories} from '../constant/articleCategoies'
+import {categories} from '../../articles/constant/articleCategoies'
 
 
 export default function page() {

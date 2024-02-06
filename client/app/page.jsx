@@ -11,9 +11,7 @@ export default async function Home() {
     if(text.length < length) return text
     return text.slice(0,length) + '...'
   }
-  if(articles.message){
-    return <p>{articles.message} </p>
-  }
+ 
   return (
     <main className="globalWidth">
       <ul className="mt-[100px] ">
