@@ -12,13 +12,20 @@ const app = express()
 // artciles routes
 route.get('/articles', getArticles)
 route.get('/article/:id',getArticle)
-route.post('/article',authVerification, postArticle)
-route.delete('/article/:id',authVerification,deleteArticle)
-route.put('/article/:id',authVerification, editArticle)
+route.post('/article', postArticle)
+route.delete('/article/:id',deleteArticle)
+route.put('/article/:id', editArticle)
 
-// users routes
+// auth routes
 route.post('/auth/register', register)
 route.post('/auth/login', login)
+
+
+// verify token
+route.get('/auth/checkToken', authVerification, (req, res) =>{
+    const {username, token } = req.auth
+     res.status(200).json({username ,token})
+})
 
 
 // files routes

@@ -1,6 +1,7 @@
 import { format } from "date-fns";
 import { $createParagraphNode, $createTextNode, $getRoot } from "lexical";
 import { $createListItemNode, $createListNode } from "@lexical/list";
+// import { useSelector } from "react-redux";
 
 /**
  * docs: https://lexical.dev/docs/demos/plugins/markdown
@@ -8,7 +9,8 @@ import { $createListItemNode, $createListNode } from "@lexical/list";
 
 export function textDailyStandup() {
     const root = $getRoot();
-
+    // const defaultText = useSelector(state => state.defaultText)
+    
     /**
      * Today's Standup date
      */

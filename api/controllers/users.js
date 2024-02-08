@@ -4,7 +4,6 @@ const bcrypt = require('bcrypt')
 
 
 const register = async (req, res) => {
-    console.log('body', req.body)
     const {username, password } = req.body
     if (!username || !password) {
        return res.status(400).json({ message: 'incorrecte username or password' })

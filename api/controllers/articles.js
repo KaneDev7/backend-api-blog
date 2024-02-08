@@ -48,8 +48,6 @@ const deleteArticle =  async (req, res) => {
 const editArticle = async (req, res) => {
     const { id } = req.params
     try {
-       
-        
         const article = await ArticleModel.findOne({ where: { id: id.toString() } });
         res.status(200).send({ message: `article avec id ${id} moddifier avec succée`, article })
     } catch (error) {
@@ -63,5 +61,4 @@ module.exports = {
     postArticle,
     deleteArticle,
     editArticle
-    
 }

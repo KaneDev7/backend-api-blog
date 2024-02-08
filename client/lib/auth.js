@@ -38,7 +38,5 @@ export const login = async (formData) => {
         console.log(error)
         response = error
     }
-    
     return response
-
 }

@@ -1,17 +1,34 @@
 
+"use client"
+import { useEffect, useState } from "react";
 import { getArticles } from "../lib/articles";
 import Link from "next/link";
+import { setAuth } from "./use.case/authSlice";
+import { useDispatch } from "react-redux";
 
-export default async function Home() {
+export default  function Home() {
+  const [articles,setArtcicles] = useState()
+  const dispatch = useDispatch()
 
-  const articles = await getArticles()
-  console.log('articles', articles)
 
   const troncText = (text, length) =>{
     if(text.length < length) return text
     return text.slice(0,length) + '...'
   }
  
+  useEffect(() =>{
+    const fetchData = async () =>{
+      const data = await getArticles()
+      setArtcicles(data)
+    }
+    fetchData()
+  },[])
+  
+  useEffect(() => {
+    const sessionAuth = JSON.parse(sessionStorage.getItem('auth')) || null
+    dispatch(setAuth(sessionAuth))  
+  }, [])
+
   return (
     <main className="globalWidth">
       <ul className="mt-[100px] ">

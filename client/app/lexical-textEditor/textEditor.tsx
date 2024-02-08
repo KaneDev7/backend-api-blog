@@ -7,7 +7,7 @@ import { Editor } from './text-editor'
 export default function TextEditor() {
 
   return (
-    <div className="">
+    <div className="border">
       <Editor />
     </div>
   )

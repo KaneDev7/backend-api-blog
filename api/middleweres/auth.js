@@ -7,10 +7,12 @@ const authVerification = async (req, res, next) => {
     if(!authorizationHeader){
         return res.status(401).json({ message: 'non autorisé'})
     }
-    const token = authorizationHeader.split('Bearer')[1]
-    jwt.verify(token.trim(), process.env.JWT_SECRET,(error, decoded) =>{
+    const token = authorizationHeader.split('Bearer')[1].trim()
+    jwt.verify(token, process.env.JWT_SECRET,(error, decoded) =>{
         if(error) return res.status(401).json({ message: 'token incorrecte'}) 
-        next()  
+        console.log('decoded', decoded)
+        req.auth = {username : decoded.username, token }
+        next()      
     })
 }
 
