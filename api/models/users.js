@@ -1,4 +1,4 @@
- const {  DataTypes } = require('sequelize');
+ const { DataTypes } = require('sequelize');
 const { sequelize } = require('../config/sequelize');
 
 
@@ -7,6 +7,7 @@ const { sequelize } = require('../config/sequelize');
     type: DataTypes.STRING,
     allowNull: false
   },
+
   password: {
     type: DataTypes.STRING,
     allowNull: false
@@ -16,8 +17,14 @@ const { sequelize } = require('../config/sequelize');
     type: DataTypes.STRING,
   },
 
-}, {
-  // Other model options go here
+  // article_id:{
+  //   type : DataTypes.INTEGER,
+  //   references :{
+  //     model : ArticleModel,
+  //     key: 'id'
+  //   }
+  // }
+
 });
 
 sequelize.sync().then(() => {

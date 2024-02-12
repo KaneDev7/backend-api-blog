@@ -40,12 +40,13 @@ export default function page() {
                     <div>
                         <FaCircleUser fontSize={200} color='#aaa' />
                         <p className='text-center text-red-400 mt-4 text-2xl font-medium'> {auth.username} </p>
-                        <p className='text-center text-sm'> 2 articles</p>
+                        <p className='text-center text-sm'> {articles?.length} articles</p>
                     </div>
                 </div>
                 <div className='flex-1 border min-h-[500px] p-4'>
                     <h1 className='text-2xl font-bold'>Mes articles </h1>
                     <ul className="mt-4">
+                        {articles?.length <= 0 && <p>accuun article trouvé</p> }
                         {
                             articles?.map(item => (
                                 <li className=" text-xl mt-5 flex justify-between items-center">
