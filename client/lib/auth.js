@@ -1,11 +1,11 @@
 import axios from "axios"
-
+import {baseUrl} from '../app/constatnt'
 
 export const register = async (formData) => {
     console.log('data', JSON.stringify(formData))
     let response = null
     try {
-        const res = await axios.post('http://localhost:3001/auth/register',
+        const res = await axios.post(`${baseUrl}/auth/register`,
             formData,
              {
                 headers: { 'Content-Type': 'application/json'},
@@ -25,7 +25,7 @@ export const login = async (formData) => {
     let response = null
 
     try {
-        const res = await axios.post(`http://localhost:3001/auth/login`,
+        const res = await axios.post(`${baseUrl}/auth/login`,
             formData,
              { 
                 headers: { 'Content-Type': 'application/json' },

@@ -1,4 +1,4 @@
-const { UsersModel } = require("../models/users")
+const { UsersModel } = require("../models/models")
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcrypt')
 
@@ -31,7 +31,7 @@ const login = async (req, res) => {
         return res.status(400).send({ message: 'incorrecte username or password' })
     }
     try {
-        const user = await UsersModel.findOne({ where: { username } });
+        const user = await UsersModel.findOne({ where: { username} });
         if (!user) {
             return res.status(404).json({ message: 'incorrect password or username' })
         }
@@ -48,7 +48,7 @@ const login = async (req, res) => {
         )
         await UsersModel.update({ jwt: token }, { where: { username } })
         res.cookie('token', refreshToken, { maxAge: 60000, httpOnly: true });
-        res.status(200).json({username : user.username, token })
+        res.status(200).json({username : user.username, id : user.id , token })
     
     } catch (error) {
         console.log(error)

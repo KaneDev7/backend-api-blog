@@ -1,4 +1,4 @@
-const { ArticleModel } = require('../models/articles')
+const { ArticleModel, CategoryModel, UsersModel } = require('../models/models')
 
 
 const getArticles = async (req, res) => {
@@ -10,10 +10,13 @@ const getArticles = async (req, res) => {
     }
 }
 
-const getArticle =  async (req, res) => {
+const getArticle = async (req, res) => {
     const { id } = req.params
     try {
-        const article = await ArticleModel.findOne({ where: { id: id.toString()} });
+        const article = await ArticleModel.findOne({
+            where: { id: id.toString() },
+            include : CategoryModel
+        });
         if (!article) return res.status(200).send({ message: 'article non trouvé' })
         res.status(200).send(article)
     } catch (error) {
@@ -21,20 +24,32 @@ const getArticle =  async (req, res) => {
     }
 }
 
-const postArticle =  async (req, res) => {
-    const {category, title, body, url } = req.body
-    if (!title || !body || !category)  {
-        res.status(400).send({ message: 'données incorectes' })
-    } 
+const getUserArticle = async (req, res) => {
     try {
-        await ArticleModel.create({category, title, body, url })
+        const article = await ArticleModel.findAll({
+            where : {userId : req.params.userId}
+        });
+        if (!article) return res.status(200).send({ message: 'article non trouvé' })
+        res.status(200).send(article)
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+const postArticle = async (req, res) => {
+    const { title, body, url, userId, categoryId } = req.body
+    if (!title || !body || !url, !userId ,!categoryId) {
+        return res.status(400).send({ message: 'données incorectes' })
+    }
+    try {
+        await ArticleModel.create({ title, body, url, userId, categoryId })
         res.status(200).send(JSON.stringify({ message: 'article crée' }))
     } catch (error) {
         console.log(error)
     }
 }
 
-const deleteArticle =  async (req, res) => {
+const deleteArticle = async (req, res) => {
     const { id } = req.params
     try {
         await ArticleModel.destroy({ where: { id: id.toString() } });
@@ -55,10 +70,13 @@ const editArticle = async (req, res) => {
     }
 }
 
+
+
 module.exports = {
     getArticles,
     getArticle,
     postArticle,
     deleteArticle,
-    editArticle
+    editArticle,
+    getUserArticle
 }

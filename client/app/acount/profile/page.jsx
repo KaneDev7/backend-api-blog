@@ -1,6 +1,6 @@
 "use client"
 import { useEffect, useState } from "react";
-import { deleteArticle, getArticles } from "../../../lib/articles";
+import { deleteArticle, getArticles, getUserArticle } from "../../../lib/articles";
 import Link from "next/link";
 
 import { FaCircleUser } from "react-icons/fa6";
@@ -27,7 +27,8 @@ export default function page() {
 
     useEffect(() => {
         const fetchData = async () => {
-            const data = await getArticles()
+            const data = await getUserArticle(auth?.id)
+            console.log('dataaaa', data )
             setArtcicles(data)
         }
         fetchData()
@@ -39,7 +40,7 @@ export default function page() {
                 <div className=''>
                     <div>
                         <FaCircleUser fontSize={200} color='#aaa' />
-                        <p className='text-center text-red-400 mt-4 text-2xl font-medium'> {auth.username} </p>
+                        <p className='text-center text-red-400 mt-4 text-2xl font-medium'> {auth?.username} </p>
                         <p className='text-center text-sm'> {articles?.length} articles</p>
                     </div>
                 </div>

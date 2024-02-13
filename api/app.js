@@ -4,10 +4,11 @@ const { route } = require('./routes/routes')
 const cors = require('cors')
 const  bodyParser = require('body-parser')
 const { log } = require('./middleweres/log')
-const { testConnection } = require('./config/sequelize')
+const { testConnection } = require('./config/sequelize');
+const { insertCategory } = require('./controllers/categories');
 const app = express()
 
-const port = 3001
+const port = 8000
 
 testConnection()
 
@@ -15,13 +16,11 @@ testConnection()
 app.use(cors())
 app.use(cookieParser())
 app.use(bodyParser.json())
-app.use(bodyParser.urlencoded())
+app.use(bodyParser.urlencoded({extended : false}))
 app.use(route)
 
 
-
-
-
+// insertCategory()
 
 app.listen(port , (err) =>{
     if(err) {

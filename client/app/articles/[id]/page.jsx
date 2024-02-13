@@ -38,7 +38,7 @@ export default function page() {
 
       <div className='my-[50px]'>
         <div className='w-4/6 '>
-          <p className='py-1 px-3 bg-red-600 text-[12px] text-white inline-block font-bold mb-5'> {article.category} </p>
+          <p className='py-1 px-3 bg-red-600 text-[12px] text-white inline-block font-bold mb-5'> {article.category?.title} </p>
           <h1 className='text-4xl font-bold mb-5'> {article.title} </h1>
         </div>
         <div className='flex gap-10'>

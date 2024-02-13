@@ -54,6 +54,9 @@ export default function Register() {
         } 
         if (data?.status === 200) {
             setError('')
+            setUsername('')
+            setPassword('')
+            setConfirmPassword('')
            return setSuccess('Inscription réussie')
         }
     }

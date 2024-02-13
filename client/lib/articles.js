@@ -1,8 +1,9 @@
 import axios from "axios"
+import { baseUrl } from "../app/constatnt"
 
 export const getArticles = async () => {
     try {
-        const res = await fetch('http://localhost:3001/articles')
+        const res = await fetch(`${baseUrl}/articles`)
         const data = await res.json()
         console.log('data',data)
         return data
@@ -14,7 +15,7 @@ export const getArticles = async () => {
 
 export const getArticle = async (id) => {
     try {
-        const res = await fetch(`http://localhost:3001/article/${id}`)
+        const res = await fetch(`${baseUrl}/article/${id}`)
         const data = await res.json()
         return data
     } catch (error) {
@@ -22,11 +23,23 @@ export const getArticle = async (id) => {
     }
 }
 
+export const getUserArticle = async (userId) => {
+    try {
+        const res = await fetch(`${baseUrl}/user/articles/${userId}`)
+        const data = await res.json()
+        console.log('data',data)
+        return data
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+
 
 export const posteArticle = async (formData) => {
     console.log('data', JSON.stringify(formData))
     try {
-        const res = await axios.post(`http://localhost:3001/article`,
+        const res = await axios.post(`${baseUrl}/article`,
             formData,
              { headers: { 'Content-Type': 'application/json' } }
         )
@@ -39,7 +52,7 @@ export const posteArticle = async (formData) => {
 
 export const deleteArticle = async (id) => {
     try {
-        const res = await fetch(`http://localhost:3001/article/${id}`, {
+        const res = await fetch(`${baseUrl}/article/${id}`, {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json'
@@ -54,7 +67,7 @@ export const deleteArticle = async (id) => {
 
 export const editArticle = async (id, formData) => {
     try {
-        const res = await fetch(`http://localhost:3001/article/${id}`, {
+        const res = await fetch(`${baseUrl}/article/${id}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json'
