@@ -1,10 +1,27 @@
+const url = require('url')
 const { ArticleModel, CategoryModel, UsersModel } = require('../models/models')
 
 
 const getArticles = async (req, res) => {
+
+    const {categoryId,userId } = req.query
     try {
-        const users = await ArticleModel.findAll();
-        res.status(200).send(users)
+        if (userId) {
+            const article = await ArticleModel.findAll({
+                where: { userId }
+            });
+            if (!article) return res.status(200).send({ message: 'article non trouvé' })
+            return res.status(200).send(article)
+        }
+        if (categoryId && categoryId !== '1') {
+            const article = await ArticleModel.findAll({
+                where: { categoryId }
+            });
+            if (!article) return res.status(200).send({ message: 'article non trouvé' })
+            return res.status(200).send(article)
+        }
+        const articles = await ArticleModel.findAll();
+        res.status(200).send(articles)
     } catch (error) {
         console.log(error)
     }
@@ -15,7 +32,7 @@ const getArticle = async (req, res) => {
     try {
         const article = await ArticleModel.findOne({
             where: { id: id.toString() },
-            include : CategoryModel
+            include: CategoryModel
         });
         if (!article) return res.status(200).send({ message: 'article non trouvé' })
         res.status(200).send(article)
@@ -24,21 +41,11 @@ const getArticle = async (req, res) => {
     }
 }
 
-const getUserArticle = async (req, res) => {
-    try {
-        const article = await ArticleModel.findAll({
-            where : {userId : req.params.userId}
-        });
-        if (!article) return res.status(200).send({ message: 'article non trouvé' })
-        res.status(200).send(article)
-    } catch (error) {
-        console.log(error)
-    }
-}
+
 
 const postArticle = async (req, res) => {
     const { title, body, url, userId, categoryId } = req.body
-    if (!title || !body || !url, !userId ,!categoryId) {
+    if (!title || !body || !url, !userId, !categoryId) {
         return res.status(400).send({ message: 'données incorectes' })
     }
     try {
@@ -78,5 +85,4 @@ module.exports = {
     postArticle,
     deleteArticle,
     editArticle,
-    getUserArticle
 }

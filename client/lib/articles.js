@@ -25,7 +25,19 @@ export const getArticle = async (id) => {
 
 export const getUserArticle = async (userId) => {
     try {
-        const res = await fetch(`${baseUrl}/user/articles/${userId}`)
+        const res = await fetch(`${baseUrl}/articles?userId=${userId}`)
+        const data = await res.json()
+        console.log('data',data)
+        return data
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+export const getArticleByCategory = async (categoryId) => {
+    console.log('categoryId', categoryId)
+    try {
+        const res = await fetch(`${baseUrl}/articles?categoryId=${categoryId}`)
         const data = await res.json()
         console.log('data',data)
         return data

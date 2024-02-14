@@ -62,7 +62,7 @@ export default function Register() {
     }
 
     return (
-        <div className='globalWidth max-w-sm mx-auto '>
+        <div className='max-w-sm mx-auto '>
             <div className='mt-20'>
                 <h1 className='text-4xl'> S'inscrire </h1>
                 {

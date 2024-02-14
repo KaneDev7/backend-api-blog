@@ -6,6 +6,7 @@ import Link from 'next/link'
 import { useParams, useRouter } from 'next/navigation'
 import React, { Suspense, useEffect, useRef, useState } from 'react'
 import SideBar from './sidebar'
+import Category from '../../components/Category'
 
 export default function page() {
   const [article, setArticle] = useState({})
@@ -13,7 +14,6 @@ export default function page() {
   const articleBody = useRef(null)
   const router = useRouter()
   const { id } = useParams()
-
 
 
   useEffect(() => {
@@ -35,6 +35,7 @@ export default function page() {
   if (!isLoading) return <p>Chargement...</p>
   return (
     <div className='globalWidth  '>
+      <Category />
 
       <div className='my-[50px]'>
         <div className='w-4/6 '>
@@ -44,7 +45,7 @@ export default function page() {
         <div className='flex gap-10'>
           <div className='flex-1'>
             <Image className='my-10 w-full h-[400px] object-cover' alt="image de l'article" src={`/images/${article.url}`} width={500} height={400} />
-            <div ref={articleBody} className='text-xl leading-10'></div>
+            <div ref={articleBody} className='text-xl leading-7'></div>
           </div>
           <SideBar articleId={article.id} />
         </div>

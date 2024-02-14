@@ -5,17 +5,13 @@
 
 
 .globalWidth{
-  width: 1200px;
+  max-width: 1200px;
   margin: 0 auto;
+  padding: 10px 20px;
+
 
 }
 
-@media screen and (max-width: 1050px)  {
-  .globalWidth{
-    width: 100%;
-    padding: 10px 30px;
-  }
-}
 /* :root {
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;

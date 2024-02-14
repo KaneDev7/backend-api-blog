@@ -7,9 +7,9 @@ const {
     getArticle,
     postArticle,
     deleteArticle,
-    editArticle,
-    getUserArticle
+    editArticle
 } = require('../controllers/articles')
+
 const { register, login } = require('../controllers/users')
 const { authVerification } = require('../middleweres/auth')
 const { getCategory } = require('../controllers/categories')
@@ -20,7 +20,6 @@ const app = express()
 // artciles routes
 route.get('/articles', getArticles)
 route.get('/article/:id', getArticle)
-route.get('/user/articles/:userId', getUserArticle)
 route.post('/article', postArticle)
 route.delete('/article/:id', deleteArticle)
 route.put('/article/:id', editArticle)

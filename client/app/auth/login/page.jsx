@@ -46,7 +46,7 @@ export default function Login() {
 
     }
     return (
-        <div className='globalWidth max-w-sm mx-auto '>
+        <div className=' max-w-sm mx-auto '>
             <div className='mt-20'>
                 <h1 className='text-4xl'> Se connecter </h1>
                 {

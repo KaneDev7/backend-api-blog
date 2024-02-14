@@ -18,7 +18,7 @@ export default function Sidebar({articleId}) {
             
             const dataFilterd = data.filter(item => item.id !== articleId)
             console.log('dataFilterd', dataFilterd)
-            setArticles(dataFilterd)
+            setArticles(dataFilterd.reverse())
         }
         fetcheData()
     }, [articleId])
@@ -32,7 +32,7 @@ export default function Sidebar({articleId}) {
 
                             <Image className='mt-10 w-full h-[160px] object-cover' alt="image de l'article" src={`/images/${article.url}`} width={500} height={400} />
                             <Link href={`/articles/${article.id}`}>
-                                <h1 title={article.title} className='mt-2 text-xl font-bold hover:underline'> {troncText(article.title, 50)} </h1>
+                                <h1 title={article.title} className='mt-2 text-[16px] font-bold hover:underline'> {troncText(article.title, 50)} </h1>
                             </Link>
                         </li>
                     ))

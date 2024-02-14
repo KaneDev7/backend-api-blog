@@ -6,16 +6,12 @@ import Link from "next/link";
 import { FaCircleUser } from "react-icons/fa6";
 import { useSelector } from 'react-redux';
 import { useRouter } from "next/navigation";
+import {troncText} from '../../../utils'
 
 export default function page() {
     const [articles, setArtcicles] = useState()
     const auth = useSelector(state => state.auth)
     const rooter = useRouter()
-
-    const troncText = (text, length) => {
-        if (text.length < length) return text
-        return text.slice(0, length) + '...'
-    }
 
     const handleDeleteArticle = async (id) => {
         const confirmDelete = window.confirm('Voulez-vous vraiment supprimer l\'article')
