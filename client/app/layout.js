@@ -1,14 +1,12 @@
 "use client"
-import { Inter } from "next/font/google";
+import { Open_Sans } from "next/font/google";
 import "./globals.css";
 import Navbar from "./components/Navbar";
-import React, { useEffect } from "react";
+import React from "react";
 import { Provider } from "react-redux";
 import { store } from './store/store'
-import { useParams } from "next/navigation";
-import Category from "./components/Category";
 
-const inter = Inter({ subsets: ["latin"] });
+const inter = Open_Sans({ subsets: ["latin"] });
 
 
 export default function RootLayout({ children }) {
@@ -21,7 +19,6 @@ export default function RootLayout({ children }) {
             {children}
           </div>
         </Provider>
-
       </body>
     </html>
   );

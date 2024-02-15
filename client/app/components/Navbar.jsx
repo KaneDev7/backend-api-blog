@@ -1,4 +1,6 @@
 "use client"
+import { Oswald } from "next/font/google";
+
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import React, { useEffect, useState } from 'react'
@@ -6,6 +8,8 @@ import { useDispatch, useSelector } from 'react-redux'
 import { setAuth } from '../use.case/authSlice'
 import { FaCircleUser } from "react-icons/fa6";
 import { TbLogout } from "react-icons/tb";
+
+const inter = Oswald({ subsets: ["latin"] });
 
 export default function Navbar() {
     const auth = useSelector(state => state.auth)
@@ -26,7 +30,7 @@ export default function Navbar() {
     return (
         <div className='flex justify-center items-center w-full h-[70px]  bg-black/85'>
             <div className='flex-1 globalWidth flex justify-between  text-white '>
-                <h1 className='text-3xl text-white'>
+                <h1 className={`${inter.className} text-3xl text-white`} >
                     <Link href='/' >KANBLOGS</Link>
                 </h1>
 
@@ -35,7 +39,7 @@ export default function Navbar() {
                        auth &&
                             <>
                                 <li className='text-withe-500 '>
-                                    <Link href='/acount/profile' className='flex justify-center items-center gap-2 py-2 px-4 bg-red-500 rounded-md text-black font-bold '>
+                                    <Link href='/acount/profile' className='flex justify-center items-center gap-2 py-2 px-4 bg-red-500 rounded-md text-white/85 font-bold '>
                                         <FaCircleUser size={25} />
                                         <p className='text-[12px] mt-1'>
                                             {auth?.username}

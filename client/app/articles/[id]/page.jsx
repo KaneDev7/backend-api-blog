@@ -1,18 +1,21 @@
 "use client"
+import { Oswald } from "next/font/google";
 
-import { deleteArticle, editArticle, getArticle } from '../../../lib/articles'
+import { getArticle } from '../../../lib/articles'
 import Image from 'next/image'
-import Link from 'next/link'
 import { useParams, useRouter } from 'next/navigation'
-import React, { Suspense, useEffect, useRef, useState } from 'react'
+import React, {useEffect, useRef, useState } from 'react'
 import SideBar from './sidebar'
+import Comments from './comments'
 import Category from '../../components/Category'
+
+
+const inter = Oswald({ subsets: ["latin"] });
 
 export default function page() {
   const [article, setArticle] = useState({})
   const [isLoading, setIsLoading] = useState(false)
   const articleBody = useRef(null)
-  const router = useRouter()
   const { id } = useParams()
 
 
@@ -29,25 +32,24 @@ export default function page() {
 
   }, [id])
 
-  // if(article.message){
-  //   return <p>{article.message} </p>
-  // }
   if (!isLoading) return <p>Chargement...</p>
   return (
-    <div className='globalWidth  '>
+    <div className={`globalWidth`}>
       <Category />
 
       <div className='my-[50px]'>
         <div className='w-4/6 '>
           <p className='py-1 px-3 bg-red-600 text-[12px] text-white inline-block font-bold mb-5'> {article.category?.title} </p>
-          <h1 className='text-4xl font-bold mb-5'> {article.title} </h1>
+          <h1 className={`${inter.className} text-4xl font-bold mb-5`}> {article.title} </h1>
         </div>
+
         <div className='flex gap-10'>
           <div className='flex-1'>
             <Image className='my-10 w-full h-[400px] object-cover' alt="image de l'article" src={`/images/${article.url}`} width={500} height={400} />
-            <div ref={articleBody} className='text-xl leading-7'></div>
+            <div ref={articleBody} className={`text-xl leading-7`}></div>
+            <Comments articleId={article?.id} />
           </div>
-          <SideBar articleId={article.id} />
+          <SideBar articleId={article?.id} />
         </div>
 
       </div>

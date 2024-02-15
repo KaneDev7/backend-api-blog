@@ -13,6 +13,7 @@ const {
 const { register, login } = require('../controllers/users')
 const { authVerification } = require('../middleweres/auth')
 const { getCategory } = require('../controllers/categories')
+const { getComments, postComment } = require('../controllers/comments')
 const route = express.Router()
 const app = express()
 
@@ -26,6 +27,12 @@ route.put('/article/:id', editArticle)
 
 // category routes
 route.get('/categories', getCategory)
+
+// comments routes
+route.get('/comments', getComments)
+route.post('/comments', postComment)
+
+
 
 // auth routes
 route.post('/auth/register', register)

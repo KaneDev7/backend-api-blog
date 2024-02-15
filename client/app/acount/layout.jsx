@@ -12,7 +12,6 @@ export default function AcountLayout({ children }) {
 
   useEffect(() => {
     const sessionAuth = JSON.parse(sessionStorage.getItem('auth')) || null
-    console.log('sessionAuth', sessionAuth)
     dispatch(setAuth(sessionAuth))
     if (sessionAuth) {
       setIsLoading(false)

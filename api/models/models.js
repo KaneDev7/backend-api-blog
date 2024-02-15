@@ -46,6 +46,9 @@ const ArticleModel = sequelize.define('articles', {
 });
 
 
+
+
+// category model
 const CategoryModel = sequelize.define('categories', {
     title: {
         type: DataTypes.STRING,
@@ -55,10 +58,31 @@ const CategoryModel = sequelize.define('categories', {
 });
 
 
+// comments model
+const CommentModel = sequelize.define('comments', {
+    content: {
+        type: DataTypes.TEXT,
+        allowNull: false
+    },
+    parent_comment_id: {
+        type: DataTypes.INTEGER,
+    },
+});
+
+
 UsersModel.hasMany(ArticleModel)
+UsersModel.hasMany(CommentModel)
 CategoryModel.hasMany(ArticleModel)
-ArticleModel.belongsTo(CategoryModel)
+ArticleModel.hasMany(CommentModel)
+
+
+
 ArticleModel.belongsTo(UsersModel)
+CommentModel.belongsTo(UsersModel)
+ArticleModel.belongsTo(CategoryModel)
+CommentModel.belongsTo(ArticleModel)
+
+
 
 
 
@@ -73,5 +97,6 @@ sequelize.sync().then(() => {
 module.exports = {
     ArticleModel,
     CategoryModel,
-    UsersModel
+    UsersModel,
+     CommentModel
 }
