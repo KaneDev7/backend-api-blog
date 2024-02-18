@@ -17,14 +17,6 @@ const UsersModel = sequelize.define('users', {
         type: DataTypes.STRING,
     },
 
-    // article_id:{
-    //   type : DataTypes.INTEGER,
-    //   references :{
-    //     model : ArticleModel,
-    //     key: 'id'
-    //   }
-    // }
-
 });
 
 // aricels model
@@ -67,6 +59,26 @@ const CommentModel = sequelize.define('comments', {
     parent_comment_id: {
         type: DataTypes.INTEGER,
     },
+    likes: {
+        type: DataTypes.STRING,
+        defaultValue: '[]'
+    }
+});
+
+// ResponseToComment model
+const ResponseToCommentModel = sequelize.define('responseToComment', {
+    content: {
+        type: DataTypes.TEXT,
+        allowNull: false
+    },
+
+    likes: {
+        type: DataTypes.STRING,
+        defaultValue: '[]'
+    },
+    username : {
+        type: DataTypes.STRING,
+    }
 });
 
 
@@ -74,15 +86,14 @@ UsersModel.hasMany(ArticleModel)
 UsersModel.hasMany(CommentModel)
 CategoryModel.hasMany(ArticleModel)
 ArticleModel.hasMany(CommentModel)
-
+CommentModel.hasMany(ResponseToCommentModel)
 
 
 ArticleModel.belongsTo(UsersModel)
 CommentModel.belongsTo(UsersModel)
 ArticleModel.belongsTo(CategoryModel)
 CommentModel.belongsTo(ArticleModel)
-
-
+ResponseToCommentModel.belongsTo(CommentModel)
 
 
 
@@ -98,5 +109,6 @@ module.exports = {
     ArticleModel,
     CategoryModel,
     UsersModel,
-     CommentModel
+    CommentModel,
+    ResponseToCommentModel
 }

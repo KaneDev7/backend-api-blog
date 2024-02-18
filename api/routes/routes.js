@@ -13,7 +13,7 @@ const {
 const { register, login } = require('../controllers/users')
 const { authVerification } = require('../middleweres/auth')
 const { getCategory } = require('../controllers/categories')
-const { getComments, postComment } = require('../controllers/comments')
+const { getComments, postComment, addLike, postResponseToComment, addLikeToResponseComment } = require('../controllers/comments')
 const route = express.Router()
 const app = express()
 
@@ -31,6 +31,10 @@ route.get('/categories', getCategory)
 // comments routes
 route.get('/comments', getComments)
 route.post('/comments', postComment)
+route.post('/comment/response', postResponseToComment)
+route.patch('/comments/likes/:commentId', addLike)
+route.patch('/comments/response/likes/:responseId', addLikeToResponseComment)
+
 
 
 

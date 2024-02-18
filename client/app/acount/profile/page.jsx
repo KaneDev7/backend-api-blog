@@ -13,10 +13,10 @@ export default function page() {
     const auth = useSelector(state => state.auth)
     const rooter = useRouter()
 
-    const handleDeleteArticle = async (id) => {
+    const handleDeleteArticle = async (id, url) => {
         const confirmDelete = window.confirm('Voulez-vous vraiment supprimer l\'article')
         if (!confirmDelete) return
-        const data = await deleteArticle(id)
+        const data = await deleteArticle(id, url, auth.id)
         console.log('data', data)
         setArtcicles(data?.articles)
     }
@@ -57,7 +57,7 @@ export default function page() {
                                             <Link href={`/acount/profile/edit/${item?.id}`}> Modifier </Link>
                                         </button> */}
                                         <button
-                                            onClick={() => handleDeleteArticle(item.id)}
+                                            onClick={() => handleDeleteArticle(item.id,item.url)}
                                             className="bg-red-500 text-sm py-2 px-4 rounded-md"> Supprimer </button>
                                     </div>
                                 </li>

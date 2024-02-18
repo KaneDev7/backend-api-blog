@@ -1,5 +1,6 @@
 const url = require('url')
-const { ArticleModel, CategoryModel, UsersModel } = require('../models/models')
+const { ArticleModel, CategoryModel, UsersModel, CommentModel } = require('../models/models');
+const { deleteImg } = require('./files');
 
 
 const getArticles = async (req, res) => {
@@ -58,9 +59,11 @@ const postArticle = async (req, res) => {
 
 const deleteArticle = async (req, res) => {
     const { id } = req.params
+    const {userId,imgName} =  req.query
     try {
         await ArticleModel.destroy({ where: { id: id.toString() } });
-        const articles = await ArticleModel.findAll();
+        deleteImg(imgName)
+        const articles = await ArticleModel.findAll({where: { userId }});
         res.status(200).send({ message: `article avec id ${id} supprimée avec succée`, articles })
     } catch (error) {
         console.log(error)

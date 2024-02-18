@@ -6,6 +6,7 @@ const  bodyParser = require('body-parser')
 const { log } = require('./middleweres/log')
 const { testConnection } = require('./config/sequelize');
 const { insertCategory } = require('./controllers/categories');
+const { deleteImg } = require('./controllers/files');
 const app = express()
 
 const port = 8000
@@ -21,6 +22,7 @@ app.use(route)
 
 
 // insertCategory()
+
 
 app.listen(port , (err) =>{
     if(err) {
