@@ -1,6 +1,5 @@
 const express = require('express')
 const path = require('path')
-const multer = require('multer')
 const { upload } = require('../middleweres/upload')
 const {
     getArticles,
@@ -13,10 +12,21 @@ const {
 const { register, login } = require('../controllers/users')
 const { authVerification } = require('../middleweres/auth')
 const { getCategory } = require('../controllers/categories')
-const { getComments, postComment, addLike, postResponseToComment, addLikeToResponseComment } = require('../controllers/comments')
+const {
+    getComments,
+    postComment,
+    addLike,
+    postResponseToComment,
+    addLikeToResponseComment,
+    deleteComment,
+    deleteResponseToComment,
+    editComment,
+    editResponseToComment,
+    getComment
+} = require('../controllers/comments')
+
 const route = express.Router()
 const app = express()
-
 
 // artciles routes
 route.get('/articles', getArticles)
@@ -30,12 +40,16 @@ route.get('/categories', getCategory)
 
 // comments routes
 route.get('/comments', getComments)
+route.get('/comments/:id', getComment)
 route.post('/comments', postComment)
-route.post('/comment/response', postResponseToComment)
+route.put('/comments/:id', editComment)
+route.delete('/comments/:id', deleteComment)
+route.post('/comments/response', postResponseToComment)
 route.patch('/comments/likes/:commentId', addLike)
+
+route.put('/comments/response/:id', editResponseToComment)
+route.delete('/comments/response/:id', deleteResponseToComment)
 route.patch('/comments/response/likes/:responseId', addLikeToResponseComment)
-
-
 
 
 // auth routes

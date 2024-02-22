@@ -16,7 +16,6 @@ export function convertISOToDuration(isoDate) {
   const days = duration.days();
   const hours = duration.hours();
   const minutes = duration.minutes();
-  const seconds = duration.seconds();
 
   if (years > 0) {
     return `il y'a ${years} an${years > 1 ? 's' : ''}`;
@@ -28,8 +27,6 @@ export function convertISOToDuration(isoDate) {
     return `il y'a ${hours} heure${hours > 1 ? 's' : ''}`;
   } else if (minutes > 0) {
     return `il y'a ${minutes} minute${minutes > 1 ? 's' : ''}`;
-  } else if (seconds > 0) {
-    return 'quelques secondes';
   } else {
     return 'à l\'instant';
   }

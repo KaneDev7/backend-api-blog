@@ -1,6 +1,6 @@
 "use client"
 import React, { useState, useEffect } from 'react'
-import { getArticles } from '../../../lib/articles'
+import { getArticles } from '../../../../lib/articles'
 import Image from 'next/image'
 import Link from 'next/link'
 
@@ -16,7 +16,6 @@ export default function Sidebar({ articleId }) {
         const fetcheData = async () => {
             const data = await getArticles()
             const dataFilterd = data.filter(item => item.id !== articleId)
-            console.log('dataFilterd', dataFilterd)
             setArticles(dataFilterd.reverse())
         }
         fetcheData()
