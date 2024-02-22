@@ -38,8 +38,6 @@ const ArticleModel = sequelize.define('articles', {
 });
 
 
-
-
 // category model
 const CategoryModel = sequelize.define('categories', {
     title: {

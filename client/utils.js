@@ -5,6 +5,21 @@ export const troncText = (text, length) => {
     return text.slice(0, length) + '...'
   }
 
+export const months = ["Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre"];
+
+export const formatDate = (date) =>{
+  const newDate = new Date(date)
+  const day = newDate.getDate()
+  const month =  months[newDate.getMonth()] 
+  const years = newDate.getFullYear()
+
+  const hour = newDate.getHours()
+  const minutes = newDate.getMinutes()
+  const seconde = newDate.getSeconds()
+
+  return `${day} ${month}, ${years} à ${hour}:${minutes}:${seconde} `
+
+}
 
 export function convertISOToDuration(isoDate) {
   const now = moment();

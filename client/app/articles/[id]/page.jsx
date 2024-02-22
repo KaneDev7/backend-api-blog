@@ -9,6 +9,7 @@ import SideBar from './components/sidebar'
 import Comments from './components/comments'
 import Category from '../../components/Category'
 import { getComments } from "../../../lib/comments";
+import ArticleDetail from './components/articleDetail'
 
 
 const inter = Oswald({ subsets: ["latin"] });
@@ -21,6 +22,7 @@ export default function page() {
   const articleBody = useRef(null)
   const { id: articleId } = useParams()
 
+  console.log('article', article)
 
   useEffect(() => {
     const fetcheData = async () => {
@@ -34,11 +36,9 @@ export default function page() {
       articleBody.current.innerHTML = data.body
       setCommentLength(comments.length + responseLength)
       setArticle(data)
-
     }
     fetcheData()
     setIsLoading(true)
-
   }, [articleId])
 
   if (!isLoading) return <p>Chargement...</p>
@@ -49,13 +49,18 @@ export default function page() {
       <div className='my-[100px]'>
         <div className='w-4/6 '>
           <p className='py-1  px-3 bg-red-600 text-[12px] text-white inline-block font-bold mb-7'> {article.category?.title} </p>
-          <h1 className={`${inter.className} text-5xl font-bold mb-5 leading-tight`}> {article.title} </h1>
+          <h1 className={`${inter.className} text-5xl font-bold mb-5 text-black/90 `}> {article?.title} </h1>
+          <ArticleDetail article={article} commentLength={commentLength} />
         </div>
 
         <div className='flex gap-10'>
           <div className='flex-1'>
             <Image className='my-10 w-full h-[400px] object-cover' alt="image de l'article" src={`/images/${article.url}`} width={500} height={400} />
-            <div ref={articleBody} className={`text-xl leading-8`}></div>
+            <p className="text-[13px] pb-3 flex items-center gap-3">
+              <span className="w-[4px] h-[4px] bg-primary rounded-full inline-block "></span>
+              <span> {article?.title} </span>
+            </p>
+            <div ref={articleBody} className={`text-xl leading-8 mt-5`}></div>
             <Comments commentLength={commentLength} />
           </div>
           <SideBar articleId={article?.id} />

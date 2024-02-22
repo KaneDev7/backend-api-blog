@@ -134,7 +134,8 @@ export default function Comments({ commentLength }) {
             <h1 className={`${inter.className} text-2xl font-bold text-black/75 `}>{commentLength} Commentaire{commentLength > 1 && 's'}  </h1>
             {
                 comments?.map(comment => (
-                    <div key={comment.id} className='mt-20'>
+                    <div key={comment?.id} className='mt-20'>
+                        
                         <header className={`flex gap-5 items-center py-3 border-b`} >
                             <FaCircleUser size={45} color='#9d9d9df1' />    
                             <div>
@@ -142,6 +143,7 @@ export default function Comments({ commentLength }) {
                                 <span className='text-black/60 font-medium text-[13px] '> {convertISOToDuration(comment.createdAt)} </span>
                             </div>
                         </header>
+
                         <main className='py-5'>
                             <p className='text-sm leading-6'> {comment.content} </p>
                         </main>

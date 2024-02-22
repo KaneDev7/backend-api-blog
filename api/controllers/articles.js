@@ -33,7 +33,7 @@ const getArticle = async (req, res) => {
     try {
         const article = await ArticleModel.findOne({
             where: { id: id.toString() },
-            include: CategoryModel
+            include: [CategoryModel, UsersModel]
         });
         if (!article) return res.status(200).send({ message: 'article non trouvé' })
         res.status(200).send(article)
