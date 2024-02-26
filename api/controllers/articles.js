@@ -1,25 +1,41 @@
 const url = require('url')
 const { ArticleModel, CategoryModel, UsersModel, CommentModel } = require('../models/models');
 const { deleteImg } = require('./files');
+const { Op } = require('sequelize');
+const { link } = require('fs');
 
 
 const getArticles = async (req, res) => {
 
-    const {categoryId,userId } = req.query
+    const { categoryId, userId, key } = req.query
+    console.log('query', req.query)
     try {
         if (userId) {
             const article = await ArticleModel.findAll({
                 where: { userId }
             });
-            if (!article) return res.status(200).send({ message: 'article non trouvé' })
+            if (!article) return res.status(204).send({ message: 'article non trouvé' })
             return res.status(200).send(article)
         }
+
         if (categoryId && categoryId !== '1') {
             const article = await ArticleModel.findAll({
                 where: { categoryId }
             });
-            if (!article) return res.status(200).send({ message: 'article non trouvé' })
+            if (!article) return res.status(204).send({ message: 'article non trouvé' })
             return res.status(200).send(article)
+        }
+
+        if (key) {
+            const searchArticleResult = await ArticleModel.findAll({
+                where: {
+                    title: {
+                        [Op.substring]: `%${key}%`
+                    }
+                }
+            })
+            if (!searchArticleResult) return res.status(204).send({ message: `accune article ne corresponde au mot clé` })
+            return res.status(200).send(searchArticleResult)
         }
         const articles = await ArticleModel.findAll();
         res.status(200).send(articles)
@@ -59,11 +75,11 @@ const postArticle = async (req, res) => {
 
 const deleteArticle = async (req, res) => {
     const { id } = req.params
-    const {userId,imgName} =  req.query
+    const { userId, imgName } = req.query
     try {
         await ArticleModel.destroy({ where: { id: id.toString() } });
         deleteImg(imgName)
-        const articles = await ArticleModel.findAll({where: { userId }});
+        const articles = await ArticleModel.findAll({ where: { userId } });
         res.status(200).send({ message: `article avec id ${id} supprimée avec succée`, articles })
     } catch (error) {
         console.log(error)

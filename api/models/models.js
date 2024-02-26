@@ -69,7 +69,6 @@ const ResponseToCommentModel = sequelize.define('responseToComment', {
         type: DataTypes.TEXT,
         allowNull: false
     },
-
     likes: {
         type: DataTypes.STRING,
         defaultValue: '[]'

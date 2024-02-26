@@ -29,9 +29,11 @@ export default function page() {
       setIsLoading(false)
       const comments = await getComments(articleId)
       let responseLength = 0
+
       for (const comment of comments) {
         responseLength += comment.responseToComments.length
       }
+      
       const data = await getArticle(articleId)
       articleBody.current.innerHTML = data.body
       setCommentLength(comments.length + responseLength)
@@ -45,7 +47,6 @@ export default function page() {
   return (
     <div className={`globalWidth`}>
       <Category />
-
       <div className='my-[100px]'>
         <div className='w-4/6 '>
           <p className='py-1  px-3 bg-red-600 text-[12px] text-white inline-block font-bold mb-7'> {article.category?.title} </p>
@@ -53,7 +54,7 @@ export default function page() {
           <ArticleDetail article={article} commentLength={commentLength} />
         </div>
 
-        <div className='flex gap-10'>
+        <div className='flex lg:flex-row flex-col gap-10'>
           <div className='flex-1'>
             <Image className='my-10 w-full h-[400px] object-cover' alt="image de l'article" src={`/images/${article.url}`} width={500} height={400} />
             <p className="text-[13px] pb-3 flex items-center gap-3">

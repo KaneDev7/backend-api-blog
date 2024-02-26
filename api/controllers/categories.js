@@ -5,6 +5,7 @@ const categories = [
     'Actualités internationales',
     'Politique',
     'Sport',
+    'Social',
     'Santé',
     'Sciences',
     'Faits divers',

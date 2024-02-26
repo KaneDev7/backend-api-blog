@@ -22,6 +22,16 @@ export const getArticle = async (id) => {
     }
 }
 
+export const getArticleByKey = async (key) => {
+    try {
+        const res = await fetch(`${baseUrl}/articles?key=${key}`)
+        const data = await res.json()
+        return data
+    } catch (error) {
+        console.log(error)
+    }
+}
+
 export const getUserArticle = async (userId) => {
     try {
         const res = await fetch(`${baseUrl}/articles?userId=${userId}`)

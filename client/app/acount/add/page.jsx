@@ -5,7 +5,7 @@ import Image from 'next/image'
 import React, { useState, useEffect } from 'react'
 import TextEditor from '../../lexical-textEditor/textEditor'
 import { useRouter } from 'next/navigation'
-import {getCategory} from '../../../lib/category'
+import { getCategory } from '../../../lib/category'
 import { useSelector } from 'react-redux'
 
 
@@ -18,7 +18,7 @@ export default function page() {
     const [imageSrc, setImageSrc] = useState('')
     const rooter = useRouter()
 
-    
+
     const handeFileChange = (e) => {
         if (!e.target.files[0]) return
         setFile(e.target.files[0])
@@ -26,21 +26,24 @@ export default function page() {
         setImageSrc(src)
     }
 
-    useEffect(() =>{
-        const fetchData = async () =>{
+    useEffect(() => {
+        const fetchData = async () => {
             const data = await getCategory()
             setCategoies(data)
         }
         fetchData()
-    },[])
+    }, [])
 
 
     const handleSubmit = async (e) => {
         e.preventDefault()
+        
         const content = document.querySelector('.editor-input')
         const body = content.innerHTML
-        if(!file) return
+
+        if (!file) return
         if (body.trim() === '' || title.trim() === '') return
+
         const formData = new FormData()
         const formDataImage = new FormData()
 
@@ -50,10 +53,10 @@ export default function page() {
         formData.append("userId", auth?.id)
         formData.append("url", file.name)
         formDataImage.append('image', file)
+
         setTitle('')
         setCategoryId('')
 
-        console.log(formData)
         await posteArticle(formData)
         await upload(formDataImage)
         rooter.push('/')
@@ -67,21 +70,21 @@ export default function page() {
                 {imageSrc &&
                     <Image className='my-10 w-[200px] h-[250px] object-cover' alt="image de l\'article" src={imageSrc} width={500} height={400} />
                 }
-                <form className='flex flex-col gap-4 w-full' action="" onSubmit={handleSubmit}>
+                <div className='flex flex-col gap-4 w-full' >
                     <input type="file" onChange={handeFileChange} />
                     <div className='w-full'>
-                    <label htmlFor=''  className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Catégories</label>
-                    <select 
-                    onChange={(e) => setCategoryId(e.target.value)}
-                    value={categoryId}
-                    id="" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                        <label htmlFor='' className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Catégories</label>
+                        <select
+                            onChange={(e) => setCategoryId(e.target.value)}
+                            value={categoryId}
+                            id="" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
 
-                        {
-                            categories.map(item =>(
-                                  <option key={item.id} value={item.id}>{item.title} </option>
-                            ))
-                        }
-                    </select>
+                            {
+                                categories.map(item => (
+                                    <option key={item.id} value={item.id}>{item.title} </option>
+                                ))
+                            }
+                        </select>
                     </div>
                     <div className='w-full'>
                         <label htmlFor="title" className='mb-2 block'>Titre</label>
@@ -96,8 +99,10 @@ export default function page() {
                         <label htmlFor="" className='mb-2 block'>Contenu</label>
                         <TextEditor />
                     </div>
-                    <input className='w-full h-[50px] border-none rounded-md bg-black text-white' type="submit" value='Publier' />
-                </form>
+                    <button onClick={handleSubmit} className='w-full h-[50px] border-none rounded-md bg-black text-white cursor-pointer'>
+                        Publier
+                    </button>
+                </div>
             </div>
         </div>
     )

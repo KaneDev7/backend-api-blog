@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { setAuth } from '../use.case/authSlice'
 import { FaCircleUser } from "react-icons/fa6";
 import { TbLogout } from "react-icons/tb";
+import SearchForm from "./SearchForm";
 
 const inter = Oswald({ subsets: ["latin"] });
 
@@ -29,12 +30,13 @@ export default function Navbar() {
 
     return (
         <div className='flex justify-center items-center w-full h-[70px]  bg-black/85'>
-            <div className='flex-1 globalWidth flex justify-between  text-white '>
+            <div className='flex-1 globalWidth flex justify-between items-center text-white '>
                 <h1 className={`${inter.className} text-3xl text-white`} >
                     <Link href='/' >KANBLOGS</Link>
                 </h1>
 
                 <ul className='flex justify-center items-center gap-5'>
+                <SearchForm/>
                     {
                        auth &&
                             <>

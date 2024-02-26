@@ -10,10 +10,10 @@ export default function Login() {
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
     const [error, setError] = useState('')
-    const dispatch = useDispatch()
     const rooter = useRouter()
+    const dispatch = useDispatch()
 
-
+    
     const handelUsernameChange = (e) => {
         setUsername(e.target.value)
     }
@@ -31,20 +31,21 @@ export default function Login() {
         const formData = new FormData()
         formData.append('username', username)
         formData.append('password', password)
+
         setError('')
         const data = await login(formData)
 
         if (data?.response?.status === 404) {
             return setError('Le mot de passe ou le nom d\'utilisateur est incorrecte')
         }
+
         if (data?.status === 200) {
             sessionStorage.setItem('auth', JSON.stringify(data?.data))
             dispatch(setAuth(data?.data))
             rooter.push('/')
         }
-
-
     }
+    
     return (
         <div className=' max-w-sm mx-auto '>
             <div className='mt-20'>
