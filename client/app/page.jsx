@@ -33,8 +33,8 @@ export default function Home() {
           <h1 className="text-2xl font-bold">Actualités nationales</h1>
         </header>
 
-        <span> {articles?.length} article{articles?.length > 1 && 's'} </span>
-        <ul className="grid  grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 flex-wrap">
+        <span className="text-[13px] font-medium "> {articles?.length} article{articles?.length > 1 && 's'} </span>
+        <ul className="grid  grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 flex-wrap mt-5">
           {
             articles && articles?.map(article => (
               <ArtticleItem article={article} />

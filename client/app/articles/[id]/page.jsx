@@ -61,7 +61,7 @@ export default function page() {
               <span className="w-[4px] h-[4px] bg-primary rounded-full inline-block "></span>
               <span> {article?.title} </span>
             </p>
-            <div ref={articleBody} className={`text-xl leading-8 mt-5`}></div>
+            <div ref={articleBody} className={`text-[18px] leading-8 mt-5`}></div>
             <Comments commentLength={commentLength} />
           </div>
           <SideBar articleId={article?.id} />

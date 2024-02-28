@@ -29,10 +29,10 @@ export default function Navbar() {
       }, [])
 
     return (
-        <div className='flex justify-center items-center w-full h-[70px]  bg-black/85'>
+        <div className='flex justify-center items-center w-full h-[70px]  bg-black/90'>
             <div className='flex-1 globalWidth flex justify-between items-center text-white '>
-                <h1 className={`${inter.className} text-3xl text-white`} >
-                    <Link href='/' >KANBLOGS</Link>
+                <h1 className={`${inter.className} text-4xl text-white`} >
+                    <Link href='/' >SENBLOGS</Link>
                 </h1>
 
                 <ul className='flex justify-center items-center gap-5'>
@@ -41,7 +41,7 @@ export default function Navbar() {
                        auth &&
                             <>
                                 <li className='text-withe-500 '>
-                                    <Link href='/acount/profile' className='flex justify-center items-center gap-2 py-2 px-4 bg-red-500 rounded-md text-white/85 font-bold '>
+                                    <Link href='/acount/profile' className='flex justify-center items-center gap-2 py-2 px-4 bg-primary rounded-md text-white/85 font-bold '>
                                         <FaCircleUser size={25} />
                                         <p className='text-[12px] mt-1'>
                                             {auth?.username}
@@ -54,8 +54,8 @@ export default function Navbar() {
                             }
                     {!auth &&
                         <>
-                            <li> <Link href='/auth/login'> Se connecter </Link> </li>
-                            <li> <Link href='/auth/register'> S'inscrire </Link> </li>
+                            <button className=" "> <Link href='/auth/register'> S'inscrire </Link> </button>
+                            <button className="py-3 px-4 bg-primary/90 hover:bg-primary rounded-md text-sm "> <Link href='/auth/login'> Se connecter </Link> </button>
                         </>
                     }
 

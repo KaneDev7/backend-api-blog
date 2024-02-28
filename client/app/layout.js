@@ -2,6 +2,7 @@
 import { Open_Sans } from "next/font/google";
 import "./globals.css";
 import Navbar from "./components/Navbar";
+import Footer from './components/Footer/Footer'
 import React from "react";
 import { Provider } from "react-redux";
 import { store } from './store/store'
@@ -17,6 +18,7 @@ export default function RootLayout({ children }) {
           <Navbar />
           <div className="globalWidth">
             {children}
+            <Footer />
           </div>
         </Provider>
       </body>

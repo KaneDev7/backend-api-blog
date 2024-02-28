@@ -22,7 +22,7 @@ export default function Category({ categoryId = 1 }) {
                         <li
                             key={category?.id}
                             className={`border cursor-pointer border-white  ${Number(categoryId) === category?.id ? 'bg-red-500' : 'bg-black/90'} 
-                            text-sm text-white text-nowrap hover:bg-red-500 hover:text-white`} >
+                            text-[11px] text-white text-nowrap hover:bg-red-500 hover:text-white`} >
                             <Link className='py-2 px-2 block' href={`/articles/category/${category?.id}?title=${category?.title} `}  > {category?.title} </Link>
                         </li>
                     ))

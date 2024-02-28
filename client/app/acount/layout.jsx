@@ -5,6 +5,7 @@ import { setAuth } from '../use.case/authSlice'
 import { useDispatch } from "react-redux";
 import ProfileNav from './components/profileNav'
 
+
 export default function AcountLayout({ children }) {
   const [isLoading, setIsLoading] = useState(true)
   const rooter = useRouter()
