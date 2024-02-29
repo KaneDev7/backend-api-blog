@@ -17,14 +17,12 @@ export default function page() {
         const confirmDelete = window.confirm('Voulez-vous vraiment supprimer l\'article')
         if (!confirmDelete) return
         const data = await deleteArticle(id, url, auth.id)
-        console.log('data', data)
         setArtcicles(data?.articles)
     }
 
     useEffect(() => {
         const fetchData = async () => {
             const data = await getUserArticle(auth?.id)
-            console.log('dataaaa', data)
             setArtcicles(data)
         }
         fetchData()
@@ -46,7 +44,7 @@ export default function page() {
                         {articles?.length <= 0 && <p>accuun article trouvé</p>}
                         {
                             articles?.map((item, index) => (
-                                <li className={`text-[15px] ${index !== articles.length - 1 && 'border-b'} border-primary/10 py-4 flex justify-between items-center`} >
+                                <li key={item?.id} className={`text-[15px] ${index !== articles.length - 1 && 'border-b'} border-primary/10 py-4 flex justify-between items-center`} >
                                     <div>
                                         <Link className="hover:underline" href={`/articles/${item.id}`}> {troncText(item.title, 50)} </Link>
                                         <p className="text-[12px] text-black/60 "> {new Date(item.createdAt).toLocaleDateString()} </p>

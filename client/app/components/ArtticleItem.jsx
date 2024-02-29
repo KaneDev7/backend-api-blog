@@ -5,11 +5,11 @@ import { convertISOToDuration, troncText } from '../../utils'
 
 
 
-export default function ArtticleItem({ article }) {
+export default function ArtticleItem({ article, type}) {
     return (
         <li key={article.id} className='my-5'>
             <Link href={`/articles/${article.id}`}>
-                <Image className='w-full h-[160px] object-cover' alt="image de l'article" src={`/images/${article.url}`} width={500} height={400} />
+                <Image className={`w-full aspect-auto min-h-[160px] object-cover`} alt="image de l'article" src={`/images/${article.url}`} width={500} height={400} />
             </Link>
 
             <Link href={`/articles/${article.id}`}>

@@ -28,7 +28,7 @@ const categories = [
     }
 }
 
-const getCategory = async (req, res) => {
+const getCategories = async (req, res) => {
     try {
         const categories = await CategoryModel.findAll({});
         if (!categories) return res.status(200).send({ message: 'categories non trouvé' })
@@ -38,7 +38,21 @@ const getCategory = async (req, res) => {
     }
 }
 
+const getCategory = async (req, res) =>{
+    const {title} = req.params
+    try {
+        const category = await CategoryModel.findOne({
+            where: {title}
+        });
+        if (!category) return res.status(200).send({ message: 'categorie non trouvé' })
+        res.status(200).send(category)
+    } catch (error) {
+        console.log(error)
+    }
+}
+
 module.exports = {
     insertCategory,
-    getCategory
+    getCategory,
+    getCategories
 }

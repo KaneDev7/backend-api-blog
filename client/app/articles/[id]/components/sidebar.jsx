@@ -34,7 +34,7 @@ export default function Sidebar({ articleId }) {
 
                 {
                     articles.map(article => (
-                        <ArtticleItem article={article} />
+                        <ArtticleItem key={article.id} article={article} />
                     ))
                 }
             </ul>

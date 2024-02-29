@@ -1,6 +1,6 @@
 "use client"
 import React, { useEffect, useState } from 'react'
-import { getCategory } from '../../lib/category'
+import { getCategories } from '../../lib/category'
 import Link from 'next/link'
 
 export default function Category({ categoryId = 1 }) {
@@ -8,7 +8,7 @@ export default function Category({ categoryId = 1 }) {
 
     useEffect(() => {
         const fetchData = async () => {
-            const data = await getCategory()
+            const data = await getCategories()
             setCategories(data)
         }
         fetchData()
@@ -21,9 +21,9 @@ export default function Category({ categoryId = 1 }) {
                     categories.map((category, index) => (
                         <li
                             key={category?.id}
-                            className={`border cursor-pointer border-white  ${Number(categoryId) === category?.id ? 'bg-red-500' : 'bg-black/90'} 
-                            text-[11px] text-white text-nowrap hover:bg-red-500 hover:text-white`} >
-                            <Link className='py-2 px-2 block' href={`/articles/category/${category?.id}?title=${category?.title} `}  > {category?.title} </Link>
+                            className={`border cursor-pointer'} 
+                            text-[11px] text-white text-nowrap bg-black/5 opacity-90 rounded-md hover:bg-black/10 hover:text-white m-1`} >
+                            <Link className='py-1 px-2 text-black  block' href={`/articles/category/${category?.id}?title=${category?.title} `}  > {category?.title} </Link>
                         </li>
                     ))
                 }

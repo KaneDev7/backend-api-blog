@@ -85,7 +85,7 @@ export default function Footer() {
           <p className=''>
             {
               footerBottomList.map(item => (
-                <Link href={'#'} className='text-white/60 hover:text-white text-[10px] mr-2 ' >{item} </Link>
+                <Link key={item} href={'#'} className='text-white/60 hover:text-white text-[10px] mr-2 ' >{item} </Link>
               ))
             }
           </p>

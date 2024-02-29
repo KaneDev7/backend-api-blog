@@ -5,7 +5,7 @@ import Image from 'next/image'
 import React, { useState, useEffect } from 'react'
 import TextEditor from '../../lexical-textEditor/textEditor'
 import { useRouter } from 'next/navigation'
-import { getCategory } from '../../../lib/category'
+import { getCategories, getCategory } from '../../../lib/category'
 import { useSelector } from 'react-redux'
 
 
@@ -28,7 +28,7 @@ export default function page() {
 
     useEffect(() => {
         const fetchData = async () => {
-            const data = await getCategory()
+            const data = await getCategories()
             setCategoies(data)
         }
         fetchData()

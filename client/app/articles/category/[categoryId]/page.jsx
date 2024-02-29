@@ -1,11 +1,9 @@
 "use client"
 import { getArticleByCategory } from '../../../../lib/articles'
-import Image from 'next/image'
-import Link from 'next/link'
 import { useParams, useSearchParams } from 'next/navigation'
 import React, { useEffect, useRef, useState } from 'react'
 import Category from '../../../components/Category'
-import { convertISOToDuration, troncText } from '../../../../utils'
+import ArtticleItem from '../../../components/ArtticleItem'
 
 export default function page() {
     const [articles, setArticles] = useState([])
@@ -44,14 +42,7 @@ export default function page() {
                 <ul className="grid  grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 flex-wrap">
                     {
                         articles?.map(article => (
-                            <li key={article.id} className='my-5'>
-
-                                <Image className='w-full h-[160px] object-cover' alt="image de l'article" src={`/images/${article.url}`} width={500} height={400} />
-                                <Link href={`/articles/${article.id}`}>
-                                    <h1 title={article.title} className='mt-2 text-[16px] font-bold hover:underline'> {troncText(article.title, 50)} </h1>
-                                </Link>
-                                <span className="text-[13px] text-black/75"> {convertISOToDuration(article?.createdAt)}  </span>
-                            </li>
+                          <ArtticleItem article={article}/>
                         ))
                     }
                 </ul>

@@ -22,7 +22,6 @@ export default function page() {
   const articleBody = useRef(null)
   const { id: articleId } = useParams()
 
-  console.log('article', article)
 
   useEffect(() => {
     const fetcheData = async () => {

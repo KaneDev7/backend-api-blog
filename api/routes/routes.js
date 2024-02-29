@@ -11,7 +11,7 @@ const {
 
 const { register, login } = require('../controllers/users')
 const { authVerification } = require('../middleweres/auth')
-const { getCategory } = require('../controllers/categories')
+const { getCategory, getCategories } = require('../controllers/categories')
 const {
     getComments,
     postComment,
@@ -36,7 +36,9 @@ route.delete('/article/:id', deleteArticle)
 route.put('/article/:id', editArticle)
 
 // category routes
-route.get('/categories', getCategory)
+route.get('/categories', getCategories)
+route.get('/categories/:title', getCategory)
+
 
 // comments routes
 route.get('/comments', getComments)
