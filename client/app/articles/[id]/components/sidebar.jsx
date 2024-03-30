@@ -1,8 +1,6 @@
 "use client"
 import React, { useState, useEffect } from 'react'
 import { getArticles } from '../../../../lib/articles'
-import Image from 'next/image'
-import Link from 'next/link'
 import ArtticleItem from '../../../components/ArtticleItem'
 
 export default function Sidebar({ articleId }) {

@@ -59,8 +59,13 @@ const CommentModel = sequelize.define('comments', {
     },
     likes: {
         type: DataTypes.STRING,
-        defaultValue: '[]'
-    }
+        defaultValue: '[]',
+        get(){
+            const likesVal = this.getDataValue('likes')
+            return JSON.parse(likesVal)
+        }
+    },
+    
 });
 
 // ResponseToComment model
@@ -82,7 +87,9 @@ const ResponseToCommentModel = sequelize.define('responseToComment', {
 UsersModel.hasMany(ArticleModel)
 UsersModel.hasMany(CommentModel)
 CategoryModel.hasMany(ArticleModel)
-ArticleModel.hasMany(CommentModel)
+ArticleModel.hasMany(CommentModel,{
+    
+})
 CommentModel.hasMany(ResponseToCommentModel)
 
 

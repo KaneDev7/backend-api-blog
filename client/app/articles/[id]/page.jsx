@@ -48,7 +48,7 @@ export default function page() {
       <Category />
       <div className='my-[100px]'>
         <div className='w-4/6 '>
-          <p className='py-1  px-3 bg-red-600 text-[12px] text-white inline-block font-bold mb-7'> {article.category?.title} </p>
+          <p className='py-1  px-3 bg-primary text-[12px] text-white inline-block font-bold mb-7'> {article.category?.title} </p>
           <h1 className={`${inter.className} text-5xl font-bold mb-5 text-black/90 `}> {article?.title} </h1>
           <ArticleDetail article={article} commentLength={commentLength} />
         </div>

@@ -6,7 +6,10 @@ const getComments = async (req, res) => {
     try {
         const comments = await CommentModel.findAll({
             where: { articleId },
-            include: [UsersModel, ResponseToCommentModel],
+            include: [{
+                model: UsersModel,
+                attributes: ['username'],
+            }, ResponseToCommentModel],
         });
         if (!comments) return res.status(200).send({ message: 'commentaire non trouvé' })
         res.status(200).send(comments)
@@ -21,7 +24,10 @@ const getComment = async (req, res) => {
     try {
         const comment = await CommentModel.findOne({
             where: { id },
-            include: [UsersModel],
+            include: [{
+                model: UsersModel,
+                attributes: ['username'],
+            }],
         });
         if (!comment) return res.status(200).send({ message: 'commentaire non trouvé' })
         res.status(200).send(comment)
@@ -48,13 +54,13 @@ const postComment = async (req, res) => {
 
 const editComment = async (req, res) => {
     const { id } = req.params
-    const {content} = req.body
+    const { content } = req.body
     console.log('content', content)
     if (!content) {
         return res.status(400).send({ message: 'données incorectes' })
     }
     try {
-        const article = await CommentModel.update({ content },{
+        const article = await CommentModel.update({ content }, {
             where: { id: id.toString() }
         });
         res.status(200).send({ message: `article avec id ${id} moddifier avec succée`, article })
@@ -100,14 +106,14 @@ const postResponseToComment = async (req, res) => {
     }
 }
 
-const editResponseToComment = async (req, res) =>{
+const editResponseToComment = async (req, res) => {
     const { id } = req.params
-    const {content} = req.body
+    const { content } = req.body
     if (!content) {
         return res.status(400).send({ message: 'données incorectes' })
     }
     try {
-        const article = await ResponseToCommentModel.update({ content },{
+        const article = await ResponseToCommentModel.update({ content }, {
             where: { id: id.toString() }
         });
         res.status(200).send({ message: `article avec id ${id} moddifier avec succée`, article })
@@ -152,14 +158,16 @@ const addLike = async (req, res) => {
     try {
         const comment = await CommentModel.findOne({ where: { id: commentId } })
 
-        const likesParsed = JSON.parse(comment.likes)
-        if (!likesParsed.includes(userId)) {
-            likesParsed.push(userId)
+        const likesData = [...comment.likes]
+
+        if (!likesData.includes(userId)) {
+            likesData.push(userId)
         } else {
-            const index = likesParsed.findIndex(item => item === userId)
-            likesParsed.splice(index, 1)
+            const index = likesData.findIndex(item => item === userId)
+            likesData.splice(index, 1)
         }
-        await CommentModel.update({ likes: JSON.stringify(likesParsed) }, {
+
+        await CommentModel.update({ likes: JSON.stringify(likesData) }, {
             where: { id: commentId }
         })
         res.status(200).send(JSON.stringify({ message: 'like mis à jour' }))

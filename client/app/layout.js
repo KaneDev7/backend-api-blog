@@ -6,6 +6,7 @@ import Footer from './components/Footer/Footer'
 import React from "react";
 import { Provider } from "react-redux";
 import { store } from './store/store'
+import SrollIndicator from './components/SrollIndicator'
 
 const inter = Open_Sans({ subsets: ["latin"] });
 
@@ -13,8 +14,9 @@ const inter = Open_Sans({ subsets: ["latin"] });
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={`${inter.className} bg-white`}>
+      <body className={`${inter.className} bg-white `}>
         <Provider store={store}>
+          <SrollIndicator style={'fixed'} />
           <Navbar />
           <div className="globalWidth">
             {children}

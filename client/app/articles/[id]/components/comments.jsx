@@ -42,6 +42,7 @@ export default function Comments({ commentLength }) {
         formData.append('parent_comment_id', null)
         formData.append('userId', auth?.id)
         formData.append('articleId', articleId)
+
         await postComment(formData)
         const data = await getComments(articleId)
         setComments(data)
@@ -68,7 +69,6 @@ export default function Comments({ commentLength }) {
         if (!showResposesId.includes(commentId)) {
             return setShowResposesId(v => [...v, commentId])
         }
-
         setShowResposesId(showResposesId.filter(item => item !== commentId))
     }
 
@@ -107,6 +107,7 @@ export default function Comments({ commentLength }) {
     useEffect(() => {
         const fetcheData = async () => {
             const data = await getComments(articleId)
+            console.log('comments', data)
             let responseLength = 0
             for (const comment of data) {
                 responseLength += comment.responseToComments.length
@@ -135,9 +136,9 @@ export default function Comments({ commentLength }) {
             {
                 comments?.map(comment => (
                     <div key={comment?.id} className='mt-20'>
-                        
+
                         <header className={`flex gap-5 items-center py-3 border-b`} >
-                            <FaCircleUser size={45} color='#9d9d9df1' />    
+                            <FaCircleUser size={45} color='#9d9d9df1' />
                             <div>
                                 <h2 className='font-bold text-[18px] text-black/80 '> {comment?.user?.username} </h2>
                                 <span className='text-black/60 font-medium text-[13px] '> {convertISOToDuration(comment.createdAt)} </span>
@@ -155,11 +156,11 @@ export default function Comments({ commentLength }) {
                                     className={`${inter.className} rounded-full px-2 py-[2px] font-bold  bg-black/60 text-[10px] text-white`} > REPONDRE </span>
                                 <p className='flex items-center gap-1'>
                                     {
-                                        JSON.parse(comment?.likes).includes(auth?.id.toString()) ?
+                                        comment?.likes.includes(auth?.id.toString()) ?
                                             <AiFillLike onClick={() => handleAddLike(comment?.id)} size={20} color='green' /> :
                                             <AiOutlineLike onClick={() => handleAddLike(comment?.id)} size={20} color='#7c7c7c' />
                                     }
-                                    <span className='text-[13px] text-[#7c7c7c] '> + {JSON.parse(comment?.likes).length} </span>
+                                    <span className='text-[13px] text-[#7c7c7c] '> + {comment?.likes.length} </span>
                                 </p>
                             </div>
 
@@ -204,17 +205,17 @@ export default function Comments({ commentLength }) {
             }
 
             {/* texterea */}
-                <div className='mt-10'>
-                    <form onSubmit={handleSubmit} action="">
-                        <div className='flex flex-col'>
-                            <label htmlFor="comment">Commentaires:</label>
-                            <textarea
-                                onChange={(e) => setContent(e.target.value)}
-                                value={content} id='comment' className='h-[200px] p-3 text-sm mt-4 outline-none border-2 resize-none' ></textarea>
-                        </div>
-                        <button className='h-[50px] w-1/2 opacity-90 hover:opacity-100 bg-black text-white rounded-md mt-4' type='submit'>Poster</button>
-                    </form>
-                </div>        
+            <div className='mt-10'>
+                <form onSubmit={handleSubmit} action="">
+                    <div className='flex flex-col'>
+                        <label htmlFor="comment">Commentaires:</label>
+                        <textarea
+                            onChange={(e) => setContent(e.target.value)}
+                            value={content} id='comment' className='h-[200px] p-3 text-sm mt-4 outline-none border-2 resize-none' ></textarea>
+                    </div>
+                    <button className='h-[50px] w-1/2 opacity-90 hover:opacity-100 bg-black text-white rounded-md mt-4' type='submit'>Poster</button>
+                </form>
+            </div>
         </div>
     )
 }

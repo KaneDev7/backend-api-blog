@@ -6,6 +6,7 @@ import { setAuth } from "./use.case/authSlice";
 import { useDispatch } from "react-redux";
 import Category from './components/Category'
 import ArticleList from './components/ArticleList'
+import Navbar from "./components/Navbar";
 
 
 

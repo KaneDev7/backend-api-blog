@@ -37,7 +37,7 @@ export default function SearchResult() {
         <ul className="grid  grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 flex-wrap">
           {
           articles &&  articles?.map(article => (
-              <ArtticleItem article={article}/>
+              <ArtticleItem key={article.id} article={article}/>
             ))
           }
         </ul>

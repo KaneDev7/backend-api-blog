@@ -22,7 +22,7 @@ const categories = [
             await CategoryModel.create({ title: category})
            console.log(`catégory ${category} inserer avec sucée`)
         }
-
+        
     } catch (error) {
         console.log(error)
     }

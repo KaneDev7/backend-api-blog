@@ -15,7 +15,7 @@ export default function Category({ categoryId = 1 }) {
     }, [])
 
     return (
-        <div className='my-10'>
+        <div className='mt-28'>
             <ul className='flex flex-wrap'>
                 {
                     categories.map((category, index) => (
